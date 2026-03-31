@@ -1,0 +1,97 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage[top=0.65in, bottom=0.4in, left=0.55in, right=0.55in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Colors
+\definecolor{sectionblue}{HTML}{2077B4}
+
+% Remove page numbers
+\pagestyle{empty}
+
+% Reduce spacing
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\parindent}{0pt}
+
+% Custom section command
+\renewcommand{\section}[1]{%
+  \vspace{7pt}%
+  {\large\bfseries\color{sectionblue}#1}\\[-6pt]%
+  {\color{sectionblue}\rule{\textwidth}{0.8pt}}%
+  \vspace{3pt}%
+}
+
+% Compact itemize
+\renewenvironment{itemize}{%
+  \begin{list}{\textbullet}{%
+    \setlength{\leftmargin}{1.5em}%
+    \setlength{\itemsep}{1.5pt}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\topsep}{2pt}%
+    \setlength{\partopsep}{0pt}%
+  }%
+}{\end{list}}
+
+\begin{document}
+
+% ==================== HEADER ====================
+\begin{center}
+{\LARGE\textsc{\textbf{Tianjiao Zheng}}}\\[3pt]
+1568 Juanita Way, Berkeley, CA 94702 \enspace|\enspace H: 510-292-1953 \enspace|\enspace jiaojiao1210@gmail.com
+\end{center}
+
+% ==================== EDUCATION ====================
+\section{Education}
+
+\textbf{Bachelor of Science: Economics} \hfill \textbf{2019}\\
+University of California -- San Diego \hfill San Diego, CA\\[1pt]
+{\small\textit{Relevant Courses:} Econometrics, Statistics, Financial \& Managerial Accounting, Taxation, Business Management}
+
+% ==================== WORK EXPERIENCE ====================
+\section{Work Experience}
+
+% --- Bank of Marin ---
+\textbf{Senior Credit Analyst} \hfill \textbf{06/2023 -- Present}\\
+\textbf{Bank of Marin} \hfill Oakland, CA
+\begin{itemize}
+  \item Underwrote business credit requests by analyzing financial statements, cash flow projections, and industry conditions to assess creditworthiness and identify risk drivers across a diversified middle-market portfolio.
+  \item De facto portfolio manager---managed client relationships and conducted annual portfolio reviews to validate credit quality, enforce covenant compliance, and maintain regulatory reporting accuracy.
+  \item Structured and negotiated business credit facilities---term loans, revolving lines, and long-term financing---developing loan covenants (DSCR, leverage, liquidity, net worth) and collateral requirements tailored to business, individual, and non-profit borrowers.
+  \item Prepared credit memos and approval packages for new loans, renewals, extensions, and modifications across business, individual, and non-profit clients, presenting recommendations to loan committee and senior management.
+  \item Led cross-functional implementation of Abrigo risk platform, streamlining loan origination and portfolio monitoring across multiple regional offices.
+\end{itemize}
+
+\vspace{2pt}
+
+% --- Bank of the Orient: Credit Analyst ---
+\textbf{Credit Analyst} \hfill \textbf{03/2021 -- 05/2023}\\
+\textbf{Bank of the Orient} \hfill San Francisco, CA
+\begin{itemize}
+  \item Evaluated borrowers' financials---including financial statements, tax returns, and receivables/payables aging---while assessing industry risks, collateral adequacy, and loan structuring options to support credit decisions.
+  \item Prepared credit memos and presentations summarizing borrower risk profiles, loan structures, and repayment analyses for loan committee review and approval.
+  \item Monitored borrower financial health and covenant compliance, identifying early warning signals and implementing proactive risk mitigation strategies to preserve portfolio quality.
+  \item Coordinated with sales, credit, and senior management teams to drive efficient credit decisions and support strategic portfolio growth.
+\end{itemize}
+
+\vspace{2pt}
+
+% --- Bank of the Orient: Loan Assistant ---
+\textbf{Loan Assistant} \hfill \textbf{10/2020 -- 03/2021}\\
+\textbf{Bank of the Orient} \hfill San Francisco, CA
+\begin{itemize}
+  \item Coordinated data collection and analysis to produce thorough loan packages meeting internal credit policy and regulatory standards; examined legal and credit documents for precision and compliance.
+  \item Built relationships with clients, brokers, title companies, and insurance providers to ensure seamless loan closings, funding, and ongoing transaction support.
+  \item Ordered and tracked appraisals, title reports, credit reports, and flood certifications to support underwriting timelines and ensure complete loan file readiness.
+\end{itemize}
+
+% ==================== SKILLS ====================
+\section{Skills}
+
+\textbf{Core Competencies:} Credit Risk Analysis, Loan Origination \& Structuring, Portfolio Management, Financial Modeling, Covenant Design, Regulatory Compliance, Client Relationship Management\\[2pt]
+\textbf{Tools \& Technology:} S\&P Capital IQ, Abrigo, LexisNexis, CoStar, Experian, SQL, Python, R, Tableau, Excel
+
+\end{document}

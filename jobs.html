@@ -119,6 +119,37 @@
             transition: background 0.15s;
         }
         .apply-btn:hover { background: #1557b0; }
+        td.status { white-space: nowrap; min-width: 100px; }
+        .status-select {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            text-align: center;
+            min-width: 80px;
+        }
+        .status-select.s-none { background: #f0f0f0; color: #888; }
+        .status-select.s-applied { background: #e8f0fe; color: #1a73e8; }
+        .status-select.s-interview { background: #e6f4ea; color: #137333; }
+        .status-select.s-rejected { background: #fce8e6; color: #c5221f; }
+        td.match { max-width: 320px; font-size: 13px; line-height: 1.5; color: #444; }
+        td.match details summary { cursor: pointer; color: #1a73e8; font-size: 12px; margin-top: 4px; }
+        td.match b { color: #1a1a2e; }
+        .match-tag {
+            display: inline-block; padding: 2px 10px; border-radius: 12px;
+            font-size: 11px; font-weight: 600; margin-bottom: 4px;
+        }
+        .match-good { background: #e6f4ea; color: #137333; }
+        .match-ok { background: #fef7e0; color: #b06000; }
+        .match-poor { background: #fce8e6; color: #c5221f; }
+        .resume-tag {
+            display: inline-block; padding: 1px 6px; border-radius: 4px;
+            font-size: 10px; font-weight: 500; background: #e8f0fe; color: #1a73e8;
+        }
         .no-results {
             text-align: center;
             padding: 40px;
@@ -136,23 +167,29 @@
 <body>
 
 <h1>Bay Area Credit Analyst & Portfolio Manager Jobs</h1>
-<p class="subtitle">Banks & Fintech Companies | Updated: March 2026</p>
+<p class="subtitle">Banks & Fintech Companies | Updated: March 28, 2026</p>
 
 <div class="filters">
     <select id="typeFilter" onchange="filterTable()">
         <option value="">All Company Types</option>
         <option value="Bank">Bank</option>
         <option value="Fintech">Fintech</option>
-        <option value="Asset Management">Asset Management</option>
     </select>
     <select id="roleFilter" onchange="filterTable()">
         <option value="">All Roles</option>
         <option value="Credit">Credit Analyst / Underwriter</option>
         <option value="Portfolio">Portfolio Manager</option>
     </select>
+    <select id="statusFilter" onchange="filterTable()">
+        <option value="">All Statuses</option>
+        <option value="none">未申请</option>
+        <option value="applied">已申请</option>
+        <option value="interview">面试中</option>
+        <option value="rejected">已拒绝</option>
+    </select>
     <input type="text" id="searchBox" placeholder="Search company, title, or description..." oninput="filterTable()">
 </div>
-<p class="stats" id="statsLine">Showing 25 jobs from 22 companies</p>
+<p class="stats" id="statsLine">Showing 18 jobs from 14 companies</p>
 
 <div class="table-wrapper">
 <table id="jobTable">
@@ -165,6 +202,8 @@
         <th onclick="sortTable(4)">Salary <span class="sort-arrow">&#9650;&#9660;</span></th>
         <th>Job Description</th>
         <th>Apply</th>
+        <th>Resume Match</th>
+        <th onclick="sortTable(8)">Status <span class="sort-arrow">&#9650;&#9660;</span></th>
     </tr>
 </thead>
 <tbody id="jobBody">
@@ -182,57 +221,6 @@
     <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/senior-commercial-banking-portfolio-manager-at-wells-fargo-4390849991" target="_blank">Apply</a></td>
 </tr>
 
-<!-- 2. Bank of America -->
-<tr data-type="Bank" data-role="Credit">
-    <td class="company">Bank of America</td>
-    <td><span class="tag tag-bank">Bank</span></td>
-    <td>Senior Credit Underwriter</td>
-    <td>San Francisco, CA</td>
-    <td class="salary">Not Disclosed</td>
-    <td class="desc">Focus on middle-market healthcare organizations ($50M-$2B revenue). Evaluate creditworthiness, collaborate with Credit Officers on solutions, monitor client performance, deliver financial modeling and loan structuring analysis. 5+ years commercial banking required.
-        <details><summary>More details</summary>Preferred: credit agreement negotiation experience, knowledge of loan closing processes. Full-time, first shift.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/senior-credit-underwriter-at-bank-of-america-4381118688" target="_blank">Apply</a></td>
-</tr>
-
-<!-- 3. SoFi -->
-<tr data-type="Fintech" data-role="Credit">
-    <td class="company">SoFi</td>
-    <td><span class="tag tag-fintech">Fintech</span></td>
-    <td>Senior Credit Manager</td>
-    <td>San Francisco, CA</td>
-    <td class="salary">$172,800 - $297,000</td>
-    <td class="desc">Oversee risk management across personal loans, student loan refinancing, credit cards, and mortgages. Develop underwriting strategies, analyze portfolio performance, architect credit strategies and risk tier assignments. 7+ years consumer lending required.
-        <details><summary>More details</summary>Advanced analytical skills with SQL, Python, Excel. Decision tree development, P&L analysis, post-implementation monitoring. Preferred: 7+ years personal loan credit risk, alternative data experience.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/senior-credit-manager-at-sofi-4331385585" target="_blank">Apply</a></td>
-</tr>
-
-<!-- 4. Plaid -->
-<tr data-type="Fintech" data-role="Credit">
-    <td class="company">Plaid</td>
-    <td><span class="tag tag-fintech">Fintech</span></td>
-    <td>Macro & Credit Research Economist</td>
-    <td>San Francisco, CA</td>
-    <td class="salary">$226,800 - $315,600</td>
-    <td class="desc">Build macroeconomic and credit indicators from transaction data. Develop forecasting models, identify economic turning points, produce investor-grade analyses and dashboards. PhD in Economics or equivalent required. 4-8 years experience.
-        <details><summary>More details</summary>Strong econometric and time-series modeling. Python/SQL for large datasets. Preferred: hedge fund, asset management, or fintech risk background. Consumer credit and household finance expertise.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/macro-credit-research-economist-at-plaid-4368417349" target="_blank">Apply</a></td>
-</tr>
-
-<!-- 5. Mercury -->
-<tr data-type="Fintech" data-role="Credit">
-    <td class="company">Mercury</td>
-    <td><span class="tag tag-fintech">Fintech</span></td>
-    <td>Consumer Credit Lead - Cards</td>
-    <td>San Francisco, CA</td>
-    <td class="salary">$171,000 - $213,700</td>
-    <td class="desc">Build underwriting infrastructure for a new consumer charge card from inception. Define approval logic, customer segmentation, credit limit strategies. Establish monitoring frameworks and risk guardrails. 6+ years consumer credit risk (8-12 ideal).
-        <details><summary>More details</summary>Product launch or significant redesign experience. Strong SQL, portfolio performance monitoring, comfort in early-stage ambiguous environments. IC role with potential to expand into team leadership.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/consumer-credit-lead-cards-at-mercury-4391919483" target="_blank">Apply</a></td>
-</tr>
 
 <!-- 6. Intuit -->
 <tr data-type="Fintech" data-role="Credit">
@@ -286,58 +274,6 @@
     <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/senior-credit-strategy-data-scientist-at-bill-4388301721" target="_blank">Apply</a></td>
 </tr>
 
-<!-- 10. East West Bank -->
-<tr data-type="Bank" data-role="Portfolio">
-    <td class="company">East West Bank</td>
-    <td><span class="tag tag-bank">Bank</span></td>
-    <td>Portfolio Manager</td>
-    <td>Santa Clara, CA</td>
-    <td class="salary">$125,000 - $175,000</td>
-    <td class="desc">Manage lending and credit relationships with Tech/Cross Border Commercial Team. Oversee underwriting, documentation, and closing processes. Assess evolving client risk profiles. Handle large, complex portfolios with minimal supervision.
-        <details><summary>More details</summary>10+ years banking experience (technology banking preferred). Advanced portfolio management knowledge. Mentor junior staff. Strong negotiation and client relationship abilities.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/portfolio-manager-at-east-west-bank-4387751197" target="_blank">Apply</a></td>
-</tr>
-
-<!-- 11. BMO U.S. -->
-<tr data-type="Bank" data-role="Portfolio">
-    <td class="company">BMO U.S.</td>
-    <td><span class="tag tag-bank">Bank</span></td>
-    <td>Portfolio Manager - Commercial Real Estate</td>
-    <td>San Ramon, CA</td>
-    <td class="salary">$88,800 - $165,600</td>
-    <td class="desc">Develop loan solutions for commercial real estate customers. Credit assessment & risk management (40%), client portfolio management (35%), sales support (25%). Prepare credit applications, monitor loan covenants, identify deteriorating credit.
-        <details><summary>More details</summary>7+ years underwriting and portfolio management. CRE lending expertise for loans exceeding $15 million. Mentoring junior team members. Finance/economics/accounting degree preferred.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/portfolio-manager-commercial-real-estate-at-bmo-u-s-4378080156" target="_blank">Apply</a></td>
-</tr>
-
-<!-- 12. U.S. Bank -->
-<tr data-type="Bank" data-role="Portfolio">
-    <td class="company">U.S. Bank</td>
-    <td><span class="tag tag-bank">Bank</span></td>
-    <td>Portfolio Manager - Institutional Client Group (Technology)</td>
-    <td>San Jose, CA</td>
-    <td class="salary">$148,495 - $174,700</td>
-    <td class="desc">Manage commercial banking credit relationships in technology sector. Partner with Relationship Managers to grow revenue. Underwrite credit exposures, manage portfolios, close new business, expand existing customer relationships.
-        <details><summary>More details</summary>Master's degree or equivalent + 10+ years commercial banking. Deep knowledge of commercial lending policy and regulations. Benefits include 401(k), pension, 2-5 weeks vacation.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/portfolio-manager-institutional-client-group-technology-at-u-s-bank-4381159230" target="_blank">Apply</a></td>
-</tr>
-
-<!-- 13. Fifth Third Bank -->
-<tr data-type="Bank" data-role="Portfolio">
-    <td class="company">Fifth Third Bank</td>
-    <td><span class="tag tag-bank">Bank</span></td>
-    <td>ABL Portfolio Management Executive Director</td>
-    <td>San Francisco, CA</td>
-    <td class="salary">$121,900 - $262,100</td>
-    <td class="desc">Manage the most complex Asset Based Lending (ABL) customer relationships. Oversee credit risk, develop external client relationships, evaluate risk ratings, manage complex workouts. Director-level role mentoring analysts.
-        <details><summary>More details</summary>12-15 years commercial banking credit analysis. Minimum 10 years ABL experience. Advanced analytical skills, financial modeling, professional client-facing presence.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/abl-portfolio-management-executive-director-at-fifth-third-bank-4373053604" target="_blank">Apply</a></td>
-</tr>
-
 <!-- 14. Avidbank - Credit Analyst -->
 <tr data-type="Bank" data-role="Credit">
     <td class="company">Avidbank</td>
@@ -362,19 +298,6 @@
         <details><summary>More details</summary>Bachelor's + 3+ years experience. Financial modeling, complex credit management. Hybrid work. Comprehensive benefits package.</details>
     </td>
     <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/portfolio-manager-at-avidbank-4367932960" target="_blank">Apply</a></td>
-</tr>
-
-<!-- 16. Bank of Marin - Credit Analyst -->
-<tr data-type="Bank" data-role="Credit">
-    <td class="company">Bank of Marin</td>
-    <td><span class="tag tag-bank">Bank</span></td>
-    <td>Senior Credit Analyst</td>
-    <td>Napa, CA</td>
-    <td class="salary">$78,000 - $105,000</td>
-    <td class="desc">Assess repayment sources and credit risks for commercial/real estate loans. Underwrite and recommend loan approvals. Prepare credit recommendation forms, analyze financial statements for cash flow and leverage metrics.
-        <details><summary>More details</summary>Bachelor's degree + 3-5 years related experience. Commercial banking or credit analysis background. Benefits: health coverage, retirement matching, ESOP, tuition reimbursement.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/credit-analyst-at-bank-of-marin-4333324949" target="_blank">Apply</a></td>
 </tr>
 
 <!-- 17. Bank of Marin - Portfolio Manager -->
@@ -403,18 +326,6 @@
     <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/c-i-credit-underwriter-technology-healthcare-sponsor-finance-at-amalgamated-bank-4391792862" target="_blank">Apply</a></td>
 </tr>
 
-<!-- 19. Bank of the Orient -->
-<tr data-type="Bank" data-role="Credit">
-    <td class="company">Bank of the Orient</td>
-    <td><span class="tag tag-bank">Bank</span></td>
-    <td>Credit Underwriter</td>
-    <td>San Francisco Bay Area</td>
-    <td class="salary">$71,000 - $95,000</td>
-    <td class="desc">Independent Asian Community Bank serving the Bay Area for 55+ years. Manage loan portfolios, underwrite secured/unsecured loans, analyze financial statements and tax returns, prepare loan recommendations.
-        <details><summary>More details</summary>3-10 years commercial loan underwriting. Strong financial analysis skills. Bilingual capability a plus. Apply via email: Career@bankorient.com</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/credit-underwriter-at-bank-of-the-orient-4389262782" target="_blank">Apply</a></td>
-</tr>
 
 <!-- 20. Stifel Financial Corp -->
 <tr data-type="Bank" data-role="Credit">
@@ -427,19 +338,6 @@
         <details><summary>More details</summary>1-3 years commercial banking, investment banking, or private capital investing. Understanding of private closed-end fund structures. Comprehensive benefits.</details>
     </td>
     <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/venture-banking-credit-analyst-summer-2026-start-at-stifel-financial-corp-4320311107" target="_blank">Apply</a></td>
-</tr>
-
-<!-- 21. Fremont Bank -->
-<tr data-type="Bank" data-role="Credit">
-    <td class="company">Fremont Bank</td>
-    <td><span class="tag tag-bank">Bank</span></td>
-    <td>Construction Loan Underwriter</td>
-    <td>Livermore, CA</td>
-    <td class="salary">$90,000 - $120,000</td>
-    <td class="desc">Evaluate and underwrite construction loans. Perform credit analysis on borrowers' financial statements. Prepare loan credit memorandums and present to credit committees. Visit construction sites to document progress.
-        <details><summary>More details</summary>5 years construction/CRE underwriting required. Bay Area real estate market knowledge preferred. Benefits: 401(k) match, ESOP, tuition reimbursement, on-site gym.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/construction-loan-underwriter-at-fremont-bank-4375600951" target="_blank">Apply</a></td>
 </tr>
 
 <!-- 22. United Business Bank -->
@@ -455,43 +353,95 @@
     <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/commercial-underwriter-ii-at-united-business-bank-4391942470" target="_blank">Apply</a></td>
 </tr>
 
-<!-- 23. Cathay Bank -->
-<tr data-type="Bank" data-role="Credit">
-    <td class="company">Cathay Bank</td>
-    <td><span class="tag tag-bank">Bank</span></td>
-    <td>VP, Model Risk Governance Analyst</td>
-    <td>San Francisco, CA</td>
-    <td class="salary">$120,000 - $150,000</td>
-    <td class="desc">Execute model governance activities within risk management framework. Conduct independent model validation, lead quarterly attestation processes, develop risk reports for executive and board-level stakeholders.
-        <details><summary>More details</summary>5-7 years Model Risk Management experience with Credit, Market, or Liquidity models. Excel and SQL proficiency. Full-time with comprehensive benefits.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/vp-model-risk-governance-analyst-at-cathay-bank-4378967922" target="_blank">Apply</a></td>
-</tr>
-
-<!-- 24. BlackRock -->
-<tr data-type="Asset Management" data-role="Portfolio">
-    <td class="company">BlackRock</td>
-    <td><span class="tag tag-asset">Asset Management</span></td>
-    <td>Associate, Portfolio Manager</td>
-    <td>San Francisco, CA</td>
-    <td class="salary">$116,000 - $155,000</td>
-    <td class="desc">Manage direct indexing equity portfolios using quantitative risk models and optimization programs. Handle rebalancing based on client tax preferences. Direct client consultation on tax and risk analysis.
-        <details><summary>More details</summary>3+ years finance experience. Strong Excel (VLOOKUP, pivot tables). Preferred: Python, SQL, VBA. Hybrid (4 days in-office). Benefits include Flexible Time Off, tuition reimbursement.</details>
-    </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/associate-portfolio-manager-at-blackrock-4386818001" target="_blank">Apply</a></td>
-</tr>
-
-<!-- 25. Goldman Sachs -->
+<!-- 23. BMO U.S. - VP Credit Portfolio Officer ⚠️ Deadline Apr 2 -->
 <tr data-type="Bank" data-role="Portfolio">
-    <td class="company">Goldman Sachs</td>
+    <td class="company">BMO U.S.</td>
     <td><span class="tag tag-bank">Bank</span></td>
-    <td>Trust Relationship Manager, VP</td>
+    <td>VP, Credit Portfolio Officer (Emerging Middle Market)</td>
     <td>San Francisco, CA</td>
-    <td class="salary">Not Disclosed</td>
-    <td class="desc">Asset & Wealth Management division. Manage trust relationships and portfolio advisory services for high-net-worth clients. Develop investment strategies and maintain client relationships at the VP level.
-        <details><summary>More details</summary>Senior-level role in Goldman Sachs' wealth management. Requires strong analytical skills and client-facing presence.</details>
+    <td class="salary">$88,800 - $165,600</td>
+    <td class="desc">Evaluate commercial transaction risk, analyze financial statements, manage portfolio performance. Credit decisions on new/renewal/extension loans. Adhere to regulatory compliance. 5-7 years credit or lending experience preferred.
+        <details><summary>More details</summary>Bachelor's required (Business/Finance/Accounting preferred). Expert financial analysis, advanced credit risk assessment, loan structuring. ⚠️ Deadline: April 2, 2026.</details>
     </td>
-    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/asset-wealth-management-trust-relationship-manager-vice-president-san-francisco-at-goldman-sachs-4280243520" target="_blank">Apply</a></td>
+    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/vp-credit-portfolio-officer-commercial-emerging-middle-market-at-bmo-u-s-4375613121" target="_blank">Apply</a></td>
+</tr>
+
+<!-- 24. BMO U.S. - Senior PM Emerging Middle Market -->
+<tr data-type="Bank" data-role="Portfolio">
+    <td class="company">BMO U.S.</td>
+    <td><span class="tag tag-bank">Bank</span></td>
+    <td>Senior Portfolio Manager (Emerging Middle Market)</td>
+    <td>San Francisco, CA</td>
+    <td class="salary">$88,800 - $165,600</td>
+    <td class="desc">Evaluate commercial transaction risk, financial statement analysis, manage portfolio deterioration. Credit decisions on commercial loans. Also available in San Jose and San Ramon locations. 5-7 years preferred.
+        <details><summary>More details</summary>Bachelor's required (Business/Finance/Accounting preferred). Expert financial analysis, portfolio management, credit risk assessment. Deadline: April 12, 2026.</details>
+    </td>
+    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/senior-portfolio-manager-commercial-emerging-middle-market-at-bmo-u-s-4385186033" target="_blank">Apply</a></td>
+</tr>
+
+<!-- 25. BMO U.S. - AVP PM Religious Institutions -->
+<tr data-type="Bank" data-role="Portfolio">
+    <td class="company">BMO U.S.</td>
+    <td><span class="tag tag-bank">Bank</span></td>
+    <td>AVP, Portfolio Manager (Religious Institutions)</td>
+    <td>San Ramon, CA</td>
+    <td class="salary">$88,800 - $165,600</td>
+    <td class="desc">Portfolio management for commercial banking religious institutions segment. Credit analysis, client proposals, portfolio monitoring. 5-7 years credit or lending experience preferred. AVP level.
+        <details><summary>More details</summary>Bachelor's required (Business/Finance/Accounting preferred). Financial analysis, loan structuring, credit risk assessment. Deadline: April 27, 2026.</details>
+    </td>
+    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/avp-portfolio-manager-commercial-banking-religious-institutions-at-bmo-u-s-4378083037" target="_blank">Apply</a></td>
+</tr>
+
+<!-- 26. East West Bank - Portfolio Manager -->
+<tr data-type="Bank" data-role="Portfolio">
+    <td class="company">East West Bank</td>
+    <td><span class="tag tag-bank">Bank</span></td>
+    <td>Portfolio Manager</td>
+    <td>Pleasanton, CA</td>
+    <td class="salary">$75,000 - $150,000</td>
+    <td class="desc">Commercial Real Estate Banking portfolio management. Underwriting, credit monitoring, portfolio management, and business development. Evaluate cash-flow and collateral-based credits, risk-rate loans per bank policy. Entry level seniority.
+        <details><summary>More details</summary>Bachelor's + 2+ years banking experience. Credit policy, risk-rating procedures. Treasury/FX/Derivative product knowledge. No visa sponsorship. Deadline: April 24, 2026.</details>
+    </td>
+    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/portfolio-manager-at-east-west-bank-4374508821" target="_blank">Apply</a></td>
+</tr>
+
+<!-- 27. Amalgamated Bank - Climate Portfolio Manager -->
+<tr data-type="Bank" data-role="Portfolio">
+    <td class="company">Amalgamated Bank</td>
+    <td><span class="tag tag-bank">Bank</span></td>
+    <td>Climate Portfolio Manager</td>
+    <td>San Francisco, CA</td>
+    <td class="salary">$100,000 - $135,000</td>
+    <td class="desc">Portfolio management for climate and renewable energy lending. Commercial banking credit analysis for climate-focused projects. Mission-driven bank focused on sustainability. 3-7 years experience in commercial banking, project finance, or climate lending.
+        <details><summary>More details</summary>Bachelor's in Business/Finance/Accounting. Financial analysis, commercial loan structure knowledge, Excel. Hybrid (Mon-Thu on-site). Deadline: April 16, 2026.</details>
+    </td>
+    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/climate-portfolio-manager-at-amalgamated-bank-4386956238" target="_blank">Apply</a></td>
+</tr>
+
+<!-- 28. U.S. Bank - Relationship Manager Associate -->
+<tr data-type="Bank" data-role="Portfolio">
+    <td class="company">U.S. Bank</td>
+    <td><span class="tag tag-bank">Bank</span></td>
+    <td>Relationship Manager Associate</td>
+    <td>San Francisco, CA</td>
+    <td class="salary">$117,725 - $138,500</td>
+    <td class="desc">Corporate & Commercial Banking. Credit experience in financial accounting, commercial lending, and loan structuring. Analytical skills for relationship management and business development. Ideal for credit analysts transitioning to RM/PM roles.
+        <details><summary>More details</summary>Bachelor's + 4-6 years banking or sales experience. May close early due to high volume. Deadline: April 24, 2026.</details>
+    </td>
+    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/relationship-manager-associate-at-u-s-bank-4389974761" target="_blank">Apply</a></td>
+</tr>
+
+<!-- 29. Bank of San Francisco - RM Commercial Banking -->
+<tr data-type="Bank" data-role="Portfolio">
+    <td class="company">Bank of San Francisco</td>
+    <td><span class="tag tag-bank">Bank</span></td>
+    <td>Relationship Manager, Commercial Banking</td>
+    <td>San Francisco, CA</td>
+    <td class="salary">$110,000 - $160,000+</td>
+    <td class="desc">Commercial banking relationship management. Loan origination through credit committee presentation. Manage and grow commercial client portfolio. Community bank serving SF/Bay Area businesses. Uncapped incentive plan on top of base.
+        <details><summary>More details</summary>Credit/analytical skills, commercial banking knowledge, SF/Bay Area market ties. Salesforce experience. Apply: humanresources@bankbsf.com. Deadline: April 15, 2026.</details>
+    </td>
+    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/relationship-manager-at-bank-of-san-francisco-4385605796" target="_blank">Apply</a></td>
 </tr>
 
 </tbody>
@@ -501,20 +451,70 @@
 <p class="no-results" id="noResults">No matching jobs found. Try adjusting your filters.</p>
 
 <script>
+const STATUS_KEY = 'jobTracker_status';
+const statusLabels = { none: '未申请', applied: '已申请', interview: '面试中', rejected: '已拒绝' };
+const statusClasses = { none: 's-none', applied: 's-applied', interview: 's-interview', rejected: 's-rejected' };
+
+function loadStatuses() {
+    try { return JSON.parse(localStorage.getItem(STATUS_KEY)) || {}; } catch { return {}; }
+}
+function saveStatuses(data) {
+    localStorage.setItem(STATUS_KEY, JSON.stringify(data));
+}
+
+function getRowKey(row) {
+    const company = row.cells[0].textContent.trim();
+    const title = row.cells[2].textContent.trim();
+    return company + '|' + title;
+}
+
+function initStatusCells() {
+    const saved = loadStatuses();
+    document.querySelectorAll('#jobBody tr').forEach(row => {
+        const key = getRowKey(row);
+        const current = saved[key] || 'none';
+        const td = document.createElement('td');
+        td.className = 'status';
+        const sel = document.createElement('select');
+        sel.className = 'status-select ' + statusClasses[current];
+        Object.keys(statusLabels).forEach(val => {
+            const opt = document.createElement('option');
+            opt.value = val;
+            opt.textContent = statusLabels[val];
+            if (val === current) opt.selected = true;
+            sel.appendChild(opt);
+        });
+        sel.addEventListener('change', function() {
+            const data = loadStatuses();
+            data[key] = this.value;
+            saveStatuses(data);
+            this.className = 'status-select ' + statusClasses[this.value];
+            row.dataset.status = this.value;
+            filterTable();
+        });
+        td.appendChild(sel);
+        row.appendChild(td);
+        row.dataset.status = current;
+    });
+}
+
 function filterTable() {
     const typeVal = document.getElementById('typeFilter').value.toLowerCase();
     const roleVal = document.getElementById('roleFilter').value.toLowerCase();
+    const statusVal = document.getElementById('statusFilter').value.toLowerCase();
     const search = document.getElementById('searchBox').value.toLowerCase();
     const rows = document.querySelectorAll('#jobBody tr');
     let visible = 0;
     rows.forEach(row => {
         const type = (row.dataset.type || '').toLowerCase();
         const role = (row.dataset.role || '').toLowerCase();
+        const status = (row.dataset.status || 'none').toLowerCase();
         const text = row.textContent.toLowerCase();
         const matchType = !typeVal || type.includes(typeVal);
         const matchRole = !roleVal || role.includes(roleVal);
+        const matchStatus = !statusVal || status === statusVal;
         const matchSearch = !search || text.includes(search);
-        if (matchType && matchRole && matchSearch) {
+        if (matchType && matchRole && matchStatus && matchSearch) {
             row.style.display = '';
             visible++;
         } else {
@@ -543,6 +543,146 @@ function sortTable(colIdx) {
     });
     rows.forEach(row => tbody.appendChild(row));
 }
+
+// Resume match data: keyed by "Company|Title"
+const matchData = {
+    "Wells Fargo|Senior Commercial Banking Portfolio Manager": {
+        level: "ok", resume: "PM",
+        strengths: "商业信贷承销、财务报表分析、风险评分模型、ETL 自动化、跨部门风控平台实施",
+        jobMatch: "Bank of Marin de facto PM 经验直接对口；复杂信贷调查、流程改进、数据可视化汇报决策层",
+        gaps: "要求 4+ 年 PM 经验，正式 PM title 仅为 de facto；无贷款谈判（利率/条款/抵押）经验；无 nCino（但有 Abrigo）"
+    },
+    "Intuit|Staff Credit Risk Analyst - Fintech": {
+        level: "ok", resume: "PM",
+        strengths: "SQL/Python 数据分析、信贷策略开发、组合绩效监控",
+        jobMatch: "信贷风险分析经验、数据驱动风险评估、风险评分模型开发经验直接相关；Tableau 数据可视化",
+        gaps: "无消费贷/Fintech 行业经验；无客户分群经验；5 年经验在要求范围内但非 Fintech 背景"
+    },
+    "Chime|Senior Data Analyst, Credit Risk": {
+        level: "ok", resume: "PM",
+        strengths: "SQL/Python、信贷风险分析、数据分析（4+ 年 ✓）、信贷风险经验（2+ 年 ✓）",
+        jobMatch: "信贷政策开发经验、风险评分模型搭建、数据可视化（Tableau/Matplotlib）；年限要求完全满足",
+        gaps: "无 Fintech/消费贷经验；无分期贷产品经验；无后端消费信贷风险策略设计经验"
+    },
+    "LendingClub|Sr Credit Strategy Analyst": {
+        level: "ok", resume: "PM",
+        strengths: "SQL、Python/R、Tableau、信贷分析、组合绩效监控",
+        jobMatch: "承销策略经验、数据可视化 dashboard 搭建、年限要求轻松满足（2-3 年 vs 5 年经验）",
+        gaps: "无消费贷/个人贷产品经验；无 A/B 测试经验；无定价策略经验；薪资 $109-125k 可能偏低"
+    },
+    "BILL|Senior Credit Strategy Data Scientist": {
+        level: "ok", resume: "PM",
+        strengths: "SQL/Python、信贷风险分析、Tableau、团队指导",
+        jobMatch: "风控框架开发、信贷策略、数据可视化 dashboard；有 mentoring 经验",
+        gaps: "无 Fintech/电商/在线支付背景；无欺诈风险经验；Data Scientist title 但实际更偏策略分析"
+    },
+    "Avidbank|Credit Analyst": {
+        level: "good", resume: "Fintech",
+        strengths: "商业信贷分析、财务报表分析、现金流分析、贷款结构建议",
+        jobMatch: "经验完全匹配且超出要求；Specialty Finance/Sponsor Lending 是新领域但信贷基础扎实",
+        gaps: "会是 title 降级（Senior → 非 Senior）；薪资 $69-90k 大幅低于当前水平；可能被认为 overqualified"
+    },
+    "Avidbank|AVP Portfolio Manager": {
+        level: "good", resume: "PM",
+        strengths: "De facto PM 经验、信贷管理、财务建模、团队指导、贷款委员会汇报",
+        jobMatch: "3+ 年经验要求轻松满足；组合信贷监控、closings 协调、mentor 初级成员全部对口",
+        gaps: "薪资 $90-140k 可能略低；Specialty Finance 是新领域但基本功可迁移"
+    },
+    "Bank of Marin|Portfolio Manager - Senior I": {
+        level: "good", resume: "PM",
+        strengths: "已在该行工作近 3 年，熟悉内部系统（Abrigo）、流程、团队",
+        jobMatch: "内部晋升机会！De facto PM → 正式 PM；中端市场承销、信贷风险管理、Abrigo 使用全部对口；5 年经验在 5-7 年范围内",
+        gaps: "需要从 Credit Analyst title 正式过渡到 PM；Oakland 地点需确认是否接受"
+    },
+    "Amalgamated Bank|C&I Credit Underwriter": {
+        level: "ok", resume: "Fintech",
+        strengths: "C&I 信贷承销、财务报表分析、尽职调查、信贷风险评估、合规",
+        jobMatch: "商业信贷承销经验直接对口；信用备忘录撰写和信贷委员会汇报经验匹配；监管合规经验",
+        gaps: "要求 6+ 年美国受监管商业银行经验（~5 年，略差）；无非营利/CDFI 贷款经验；Mission-driven 文化需体现价值观匹配"
+    },
+    "Stifel Financial Corp|Venture Banking Credit Analyst (Summer 2026)": {
+        level: "ok", resume: "Fintech",
+        strengths: "商业银行、信贷分析、承销、组合管理",
+        jobMatch: "信贷分析经验超出 1-3 年要求；贷款 origination 到 execution 全流程理解",
+        gaps: "可能 overqualified（要求 1-3 年 vs 5 年）；无风投/基金金融经验；无私募基金结构知识；薪资 $80-100k 偏低"
+    },
+    "United Business Bank|Commercial Underwriter II": {
+        level: "good", resume: "Fintech",
+        strengths: "商业信贷分析、贷款评估、合规监控、5 年贷款经验 ✓",
+        jobMatch: "信贷分析和承销经验完美匹配；贷款合规监控经验对口；客户互动信贷请求处理经验；年限完全满足",
+        gaps: "薪资 $100-115k 与当前水平接近但无明显涨幅；区域银行规模较小"
+    },
+    "BMO U.S.|VP, Credit Portfolio Officer (Emerging Middle Market)": {
+        level: "good", resume: "PM",
+        strengths: "信贷分析、组合管理、de facto PM、财务建模、贷款结构评估",
+        jobMatch: "5-7 年经验完美匹配；Emerging Middle Market 与当前中端市场经验直接对口；Credit Analyst → PM 的过渡正是该岗位期望的背景",
+        gaps: "VP title 可能偏高；⚠️ 4 月 2 日截止非常紧急！大行环境不同于社区银行"
+    },
+    "BMO U.S.|Senior Portfolio Manager (Emerging Middle Market)": {
+        level: "ok", resume: "PM",
+        strengths: "信贷分析、组合监控、财务报表分析、de facto PM 经验",
+        jobMatch: "5-7 年范围匹配；中端市场商业贷款直接对口；组合管理和信贷风险评估经验",
+        gaps: "Senior PM title 偏高；大行环境不同于社区银行；多个地点可选（SF/SJ/San Ramon）"
+    },
+    "BMO U.S.|AVP, Portfolio Manager (Religious Institutions)": {
+        level: "good", resume: "PM",
+        strengths: "信贷分析、财务报表分析、组合管理、de facto PM 经验、Abrigo 平台实施",
+        jobMatch: "5-7 年经验范围匹配（~5 年）；AVP 级别合适；商业贷款信贷分析直接对口",
+        gaps: "无宗教机构贷款经验（但商业信贷技能完全可迁移）；San Ramon 地点较远"
+    },
+    "East West Bank|Portfolio Manager": {
+        level: "good", resume: "PM",
+        strengths: "商业银行组合管理、信贷分析、承销、财务建模、Asian community bank 背景",
+        jobMatch: "2+ 年要求远低于实际 ~5 年经验；信贷政策理解、风险评级、现金流分析全部对口；Bank of the Orient 亚裔社区银行经验加分",
+        gaps: "无 Treasury/FX/Derivative 产品知识；Pleasanton 地点较远；$75-150K 薪资范围偏宽下限偏低"
+    },
+    "Amalgamated Bank|Climate Portfolio Manager": {
+        level: "ok", resume: "PM",
+        strengths: "商业信贷承销、财务报表分析、组合管理经验、数据分析（SQL/Python）",
+        jobMatch: "3-7 年经验完美匹配；商业银行信贷分析直接对口；同一家银行还有 C&I Underwriter 职位可交叉申请",
+        gaps: "无气候/可再生能源贷款经验；无项目融资/结构化融资经验；需要学习 Moody's Credit Lens"
+    },
+    "U.S. Bank|Relationship Manager Associate": {
+        level: "good", resume: "PM",
+        strengths: "信贷分析、财务建模、贷款结构评估、商业银行经验、数据可视化",
+        jobMatch: "4-6 年经验完美匹配；明确适合 Credit Analyst 过渡到 RM/PM；Corporate & Commercial Banking 部门；薪资 $117-138K 有涨幅",
+        gaps: "需要发展销售/业务拓展能力；从纯分析转向关系管理的角色变化"
+    },
+    "Bank of San Francisco|Relationship Manager, Commercial Banking": {
+        level: "ok", resume: "Fintech",
+        strengths: "商业银行经验、信贷分析、客户关系管理、Bay Area 市场网络",
+        jobMatch: "社区银行环境类似当前工作；信贷承销经验、贷款委员会汇报经验对口；uncapped incentive 薪资上限高",
+        gaps: "RM 需要更强的业务拓展/销售能力（vs 纯分析背景）；mid-senior 级别可能偏高；需要 Salesforce 经验"
+    },
+};
+
+function initMatchCells() {
+    document.querySelectorAll('#jobBody tr').forEach(row => {
+        const key = getRowKey(row);
+        const data = matchData[key];
+        const td = document.createElement('td');
+        td.className = 'match';
+        if (data) {
+            const levelLabel = { good: 'Good Fit', ok: 'Stretch', poor: 'Not a Fit' };
+            const levelClass = { good: 'match-good', ok: 'match-ok', poor: 'match-poor' };
+            td.innerHTML =
+                `<span class="match-tag ${levelClass[data.level]}">${levelLabel[data.level]}</span>` +
+                (data.resume !== '—' ? ` <span class="resume-tag">${data.resume} Resume</span>` : '') +
+                `<details><summary>查看分析</summary>` +
+                `<b>我的强项：</b>${data.strengths}<br>` +
+                `<b>对口优势：</b>${data.jobMatch}<br>` +
+                `<b>不足/Gap：</b>${data.gaps}</details>`;
+        } else {
+            td.textContent = '—';
+        }
+        // Insert before the last cell (Status)
+        const statusCell = row.querySelector('td.status');
+        row.insertBefore(td, statusCell);
+    });
+}
+
+initStatusCells();
+initMatchCells();
 </script>
 
 </body>
