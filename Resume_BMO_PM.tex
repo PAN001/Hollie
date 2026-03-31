@@ -1,6 +1,6 @@
 \documentclass[letterpaper,11pt]{article}
 
-\usepackage[top=0.65in, bottom=0.4in, left=0.55in, right=0.55in]{geometry}
+\usepackage[top=0.5in, bottom=0.35in, left=0.55in, right=0.55in]{geometry}
 \usepackage[hidelinks]{hyperref}
 \usepackage{xcolor}
 \usepackage[T1]{fontenc}
@@ -25,19 +25,19 @@
 
 % Custom section command
 \renewcommand{\section}[1]{%
-  \vspace{7pt}%
+  \vspace{5pt}%
   {\large\bfseries\color{sectionblue}#1}\\[-6pt]%
   {\color{sectionblue}\rule{\textwidth}{0.8pt}}%
-  \vspace{3pt}%
+  \vspace{1pt}%
 }
 
 % Compact itemize
 \renewenvironment{itemize}{%
   \begin{list}{\textbullet}{%
     \setlength{\leftmargin}{1.5em}%
-    \setlength{\itemsep}{1.5pt}%
+    \setlength{\itemsep}{1pt}%
     \setlength{\parsep}{0pt}%
-    \setlength{\topsep}{2pt}%
+    \setlength{\topsep}{1pt}%
     \setlength{\partopsep}{0pt}%
   }%
 }{\end{list}}
@@ -46,16 +46,14 @@
 
 % ==================== HEADER ====================
 \begin{center}
-{\LARGE\textsc{\textbf{Tianjiao Zheng}}}\\[3pt]
-1568 Juanita Way, Berkeley, CA 94702 \enspace|\enspace H: 510-292-1953 \enspace|\enspace jiaojiao1210@gmail.com
+{\LARGE\textsc{\textbf{Tianjiao Zheng}}}\\[2pt]
+Berkeley, CA \enspace|\enspace 510-292-1953 \enspace|\enspace jiaojiao1210@gmail.com
 \end{center}
 
-% ==================== EDUCATION ====================
-\section{Education}
+% ==================== PROFESSIONAL SUMMARY ====================
+\section{Professional Summary}
 
-\textbf{Bachelor of Science: Economics} \hfill \textbf{2019}\\
-University of California -- San Diego \hfill San Diego, CA\\[1pt]
-{\small\textit{Relevant Courses:} Econometrics, Statistics, Financial \& Managerial Accounting, Taxation, Business Management}
+Senior Credit Analyst with 5+ years of commercial banking experience in credit underwriting, loan structuring, and portfolio management. Proven ability to evaluate complex borrower profiles across business, individual, and non-profit sectors while managing client relationships, ensuring covenant compliance, and driving portfolio growth.
 
 % ==================== WORK EXPERIENCE ====================
 \section{Work Experience}
@@ -71,7 +69,7 @@ University of California -- San Diego \hfill San Diego, CA\\[1pt]
   \item Led cross-functional implementation of Abrigo risk platform, streamlining loan origination and portfolio monitoring across multiple regional offices.
 \end{itemize}
 
-\vspace{2pt}
+\vspace{1pt}
 
 % --- Bank of the Orient: Credit Analyst ---
 \textbf{Credit Analyst} \hfill \textbf{03/2021 -- 05/2023}\\
@@ -83,7 +81,7 @@ University of California -- San Diego \hfill San Diego, CA\\[1pt]
   \item Coordinated with sales, credit, and senior management teams to drive efficient credit decisions and support strategic portfolio growth.
 \end{itemize}
 
-\vspace{2pt}
+\vspace{1pt}
 
 % --- Bank of the Orient: Loan Assistant ---
 \textbf{Loan Assistant} \hfill \textbf{10/2020 -- 03/2021}\\
@@ -99,5 +97,11 @@ University of California -- San Diego \hfill San Diego, CA\\[1pt]
 
 \textbf{Core Competencies:} Credit Risk Analysis, Loan Origination \& Structuring, Portfolio Management, Financial Modeling, Covenant Design, Regulatory Compliance, Client Relationship Management\\[2pt]
 \textbf{Tools \& Technology:} S\&P Capital IQ, Abrigo, LexisNexis, CoStar, Experian, SQL, Python, R, Tableau, Excel
+
+% ==================== EDUCATION ====================
+\section{Education}
+
+\textbf{Bachelor of Science: Economics} \hfill \textbf{2019}\\
+University of California -- San Diego \hfill San Diego, CA
 
 \end{document}
