@@ -167,7 +167,7 @@
 <body>
 
 <h1>Bay Area Credit Analyst & Portfolio Manager Jobs</h1>
-<p class="subtitle">Banks & Fintech Companies | Updated: March 28, 2026</p>
+<p class="subtitle">Banks & Fintech Companies | Updated: March 30, 2026</p>
 
 <div class="filters">
     <select id="typeFilter" onchange="filterTable()">
@@ -189,7 +189,7 @@
     </select>
     <input type="text" id="searchBox" placeholder="Search company, title, or description..." oninput="filterTable()">
 </div>
-<p class="stats" id="statsLine">Showing 18 jobs from 14 companies</p>
+<p class="stats" id="statsLine">Showing 19 jobs from 14 companies</p>
 
 <div class="table-wrapper">
 <table id="jobTable">
@@ -431,6 +431,19 @@
     <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/relationship-manager-associate-at-u-s-bank-4389974761" target="_blank">Apply</a></td>
 </tr>
 
+<!-- 30. BMO U.S. - Diversified Industries PM -->
+<tr data-type="Bank" data-role="Portfolio">
+    <td class="company">BMO U.S.</td>
+    <td><span class="tag tag-bank">Bank</span></td>
+    <td>Diversified Industries Portfolio Manager</td>
+    <td>San Francisco, CA</td>
+    <td class="salary">$122,400 - $228,000</td>
+    <td class="desc">Analyze credit information for commercial banking loans. Negotiate loan structures, develop credit solutions, monitor portfolio performance, and identify revenue opportunities. Manage client relationships while adhering to bank policies and regulatory standards.
+        <details><summary>More details</summary>7+ years credit/lending experience. Bachelor's required, Master's preferred (Business/Finance/Accounting). Expert loan structuring, regulatory compliance, portfolio management, credit risk assessment. Deadline: April 20, 2026.</details>
+    </td>
+    <td><a class="apply-btn" href="https://www.linkedin.com/jobs/view/commercial-banking-diversified-industries-portfolio-manager-at-bmo-u-s-4375076610" target="_blank">Apply</a></td>
+</tr>
+
 <!-- 29. Bank of San Francisco - RM Commercial Banking -->
 <tr data-type="Bank" data-role="Portfolio">
     <td class="company">Bank of San Francisco</td>
@@ -455,8 +468,15 @@ const STATUS_KEY = 'jobTracker_status';
 const statusLabels = { none: '未申请', applied: '已申请', interview: '面试中', rejected: '已拒绝' };
 const statusClasses = { none: 's-none', applied: 's-applied', interview: 's-interview', rejected: 's-rejected' };
 
+const defaultStatuses = {
+    "BMO U.S.|Diversified Industries Portfolio Manager": "applied"
+};
 function loadStatuses() {
-    try { return JSON.parse(localStorage.getItem(STATUS_KEY)) || {}; } catch { return {}; }
+    try {
+        const saved = JSON.parse(localStorage.getItem(STATUS_KEY)) || {};
+        Object.keys(defaultStatuses).forEach(k => { if (!(k in saved)) saved[k] = defaultStatuses[k]; });
+        return saved;
+    } catch { return Object.assign({}, defaultStatuses); }
 }
 function saveStatuses(data) {
     localStorage.setItem(STATUS_KEY, JSON.stringify(data));
@@ -647,6 +667,12 @@ const matchData = {
         strengths: "信贷分析、财务建模、贷款结构评估、商业银行经验、数据可视化",
         jobMatch: "4-6 年经验完美匹配；明确适合 Credit Analyst 过渡到 RM/PM；Corporate & Commercial Banking 部门；薪资 $117-138K 有涨幅",
         gaps: "需要发展销售/业务拓展能力；从纯分析转向关系管理的角色变化"
+    },
+    "BMO U.S.|Diversified Industries Portfolio Manager": {
+        level: "ok", resume: "PM",
+        strengths: "信贷分析、组合管理、de facto PM、财务建模、贷款结构评估、Abrigo 平台实施",
+        jobMatch: "商业贷款信贷分析直接对口；组合管理和信贷风险评估经验匹配；BMO 已投递多个职位，熟悉该行流程",
+        gaps: "要求 7+ 年经验（~5 年，差距明显）；Diversified Industries 涵盖行业广泛，需要更深行业专业知识；Senior 级别偏高"
     },
     "Bank of San Francisco|Relationship Manager, Commercial Banking": {
         level: "ok", resume: "Fintech",
