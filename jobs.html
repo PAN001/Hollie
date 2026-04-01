@@ -483,7 +483,8 @@ const statusLabels = { none: '未申请', applied: '已申请', interview: '面�
 const statusClasses = { none: 's-none', applied: 's-applied', interview: 's-interview', rejected: 's-rejected' };
 
 const defaultStatuses = {
-    "BMO U.S.|Diversified Industries Portfolio Manager": "applied"
+    "BMO U.S.|Diversified Industries Portfolio Manager": "applied",
+    "Amalgamated Bank|C&I Credit Underwriter": "applied"
 };
 function loadStatuses() {
     try {
@@ -722,8 +723,15 @@ function initMatchCells() {
 }
 
 const NOTES_KEY = 'jobTracker_notes';
+const defaultNotes = {
+    "Amalgamated Bank|C&I Credit Underwriter": "Desired Salary: $140,000"
+};
 function loadNotes() {
-    try { return JSON.parse(localStorage.getItem(NOTES_KEY)) || {}; } catch { return {}; }
+    try {
+        const saved = JSON.parse(localStorage.getItem(NOTES_KEY)) || {};
+        Object.keys(defaultNotes).forEach(k => { if (!(k in saved)) saved[k] = defaultNotes[k]; });
+        return saved;
+    } catch { return Object.assign({}, defaultNotes); }
 }
 function saveNotes(data) {
     localStorage.setItem(NOTES_KEY, JSON.stringify(data));
