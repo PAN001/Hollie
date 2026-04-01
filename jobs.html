@@ -150,6 +150,21 @@
             display: inline-block; padding: 1px 6px; border-radius: 4px;
             font-size: 10px; font-weight: 500; background: #e8f0fe; color: #1a73e8;
         }
+        td.notes { min-width: 180px; }
+        .notes-input {
+            width: 100%;
+            min-width: 160px;
+            padding: 4px 8px;
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            font-size: 12px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 36px;
+            line-height: 1.4;
+        }
+        .notes-input:focus { outline: none; border-color: #1a73e8; }
+        .notes-input::placeholder { color: #bbb; }
         .no-results {
             text-align: center;
             padding: 40px;
@@ -204,6 +219,7 @@
         <th>Apply</th>
         <th>Resume Match</th>
         <th onclick="sortTable(8)">Status <span class="sort-arrow">&#9650;&#9660;</span></th>
+        <th>Application Notes</th>
     </tr>
 </thead>
 <tbody id="jobBody">
@@ -705,8 +721,38 @@ function initMatchCells() {
     });
 }
 
+const NOTES_KEY = 'jobTracker_notes';
+function loadNotes() {
+    try { return JSON.parse(localStorage.getItem(NOTES_KEY)) || {}; } catch { return {}; }
+}
+function saveNotes(data) {
+    localStorage.setItem(NOTES_KEY, JSON.stringify(data));
+}
+
+function initNotesCells() {
+    document.querySelectorAll('#jobBody tr').forEach(row => {
+        const key = getRowKey(row);
+        const saved = loadNotes();
+        const current = saved[key] || '';
+        const td = document.createElement('td');
+        td.className = 'notes';
+        const textarea = document.createElement('textarea');
+        textarea.className = 'notes-input';
+        textarea.placeholder = 'Desired Salary, notes...';
+        textarea.value = current;
+        textarea.addEventListener('input', function() {
+            const data = loadNotes();
+            data[key] = this.value;
+            saveNotes(data);
+        });
+        td.appendChild(textarea);
+        row.appendChild(td);
+    });
+}
+
 initStatusCells();
 initMatchCells();
+initNotesCells();
 </script>
 
 </body>
