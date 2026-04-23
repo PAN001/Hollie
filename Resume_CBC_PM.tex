@@ -1,0 +1,107 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage[top=0.5in, bottom=0.35in, left=0.55in, right=0.55in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Colors
+\definecolor{sectionblue}{HTML}{2077B4}
+
+% Remove page numbers
+\pagestyle{empty}
+
+% Reduce spacing
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\parindent}{0pt}
+
+% Disable word hyphenation (no splitting words across lines)
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\tolerance=2000
+\emergencystretch=1em
+
+% Custom section command
+\renewcommand{\section}[1]{%
+  \vspace{5pt}%
+  {\large\bfseries\color{sectionblue}#1}\\[-6pt]%
+  {\color{sectionblue}\rule{\textwidth}{0.8pt}}%
+  \vspace{1pt}%
+}
+
+% Compact itemize
+\renewenvironment{itemize}{%
+  \begin{list}{\textbullet}{%
+    \setlength{\leftmargin}{1.5em}%
+    \setlength{\itemsep}{1pt}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\topsep}{1pt}%
+    \setlength{\partopsep}{0pt}%
+  }%
+}{\end{list}}
+
+\begin{document}
+
+% ==================== HEADER ====================
+\begin{center}
+{\LARGE\textsc{\textbf{Tianjiao (Hollie) Zheng}}}\\[2pt]
+1568 Juanita Way, Berkeley, CA 94702 \enspace|\enspace 510-292-1953 \enspace|\enspace jiaojiao1210@gmail.com
+\end{center}
+
+% ==================== PROFESSIONAL SUMMARY ====================
+\section{Professional Summary}
+
+Commercial banking professional with 5+ years of experience spanning credit underwriting, portfolio oversight, and client relationship development. Proven ability to manage and grow loan portfolios and structure complex credit solutions. Experienced in risk rating, credit strategy development, and cross-selling banking products. Frequently trusted to step into broader portfolio responsibilities, partner cross-functionally, and guide junior team members.
+
+% ==================== WORK EXPERIENCE ====================
+\section{Work Experience}
+
+% --- Bank of Marin ---
+\textbf{Senior Credit Analyst} \hfill \textbf{06/2023 -- Present}\\
+\textbf{Bank of Marin} \hfill Oakland, CA
+\begin{itemize}
+  \item Underwrote a wide range of commercial credit facilities, structuring deals to balance risk and profitability while ensuring compliance with bank credit policies.
+  \item Managed a portfolio of borrowing relationships, monitoring credit quality and proactively addressing risk exposure through ongoing covenant and financial performance tracking.
+  \item Identified opportunities for refinancing, upsizing, and cross-selling deposit and treasury products in partnership with Relationship Managers, contributing to portfolio revenue growth.
+  \item Conducted annual and periodic portfolio reviews, assessing covenant compliance, risk rating accuracy, and overall credit performance; identified early warning signals and implemented mitigation strategies.
+  \item Led implementation of a bank-wide risk platform, improving underwriting efficiency and portfolio monitoring; trained regional teams to drive adoption and operational consistency.
+\end{itemize}
+
+\vspace{1pt}
+
+% --- Bank of the Orient: Credit Analyst ---
+\textbf{Credit Analyst} \hfill \textbf{03/2021 -- 05/2023}\\
+\textbf{Bank of the Orient} \hfill San Francisco, CA
+\begin{itemize}
+  \item Prepared loan approval packages, evaluating financial performance, structure, and risk factors to support credit decisions.
+  \item Collaborated with Relationship Managers and engaged directly with clients during early-stage discussions to explore new lending opportunities.
+  \item Coordinated cross-functional team to drive efficient deal execution, while training colleagues to streamline loan closings.
+\end{itemize}
+
+\vspace{1pt}
+
+% --- Bank of the Orient: Loan Coordinator ---
+\textbf{Loan Coordinator} \hfill \textbf{10/2020 -- 03/2021}\\
+\textbf{Bank of the Orient} \hfill San Francisco, CA
+\begin{itemize}
+  \item Supported early-stage underwriting by spreading financials and organizing borrower information, helping streamline credit evaluation and decision-making.
+  \item Oversaw end-to-end loan origination process, including review of third-party reports to ensure smooth progression to closing.
+  \item Reviewed loan documentation, including legal and credit agreements, to ensure accuracy and compliance with credit approval terms.
+  \item Developed strong relationships with clients, brokers, title companies, and insurance companies to enhance collaboration and ensure seamless transactions.
+\end{itemize}
+
+% ==================== EDUCATION ====================
+\section{Education}
+
+\textbf{Bachelor of Science: Economics} \hfill \textbf{2019}\\
+University of California -- San Diego \hfill San Diego, CA
+
+% ==================== SKILLS ====================
+\section{Skills}
+
+\textbf{Technical Skills:} Portfolio Management, Credit Underwriting, Risk Rating \& Credit Policy, Loan Structuring, Financial Analysis, Accounting, Database Management, Financial Programming\\[2pt]
+\textbf{Tools:} S\&P Capital IQ, LexisNexis, CoStar, Experian, Abrigo, SQL, R, Python, Power BI
+
+\end{document}
